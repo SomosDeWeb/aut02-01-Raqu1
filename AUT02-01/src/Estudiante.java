@@ -33,4 +33,20 @@ public class Estudiante {
     public void setMatriculado(boolean matriculado) {
         this.matriculado = matriculado;
     }
+
+    public String getNombre(){
+        return this.nombre;
+    }
+
+    public int getEdad() {
+        return this.edad;
+    }
+
+    public double getMedia() {
+        return this.media;
+    }
+
+    public boolean getMatriculado() {
+        return this.matriculado;
+    }
 }

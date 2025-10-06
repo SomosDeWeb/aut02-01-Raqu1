@@ -41,15 +41,24 @@ public class Main {
                     matriculado = sc.nextBoolean();
                     sc.nextLine();
 
-                    Estudiante obj = new Estudiante(nombre,edad,notaMedia,matriculado);
-                    listadoEstudiantes.add(obj);
+                    Estudiante alumno = new Estudiante(nombre,edad,notaMedia,matriculado);
+                    listadoEstudiantes.add(alumno);
                     System.out.println("Estudinate añadido correctamente.");
                     break;
 
-
+                case 2:
+                    System.out.println("\n=== Lista de Estudiantes ===");
+                    if (listadoEstudiantes.isEmpty())
+                        System.out.println("·> No hay alumnos registrados.");
+                    else {
+                        for (Estudiante estudiante : listadoEstudiantes) {
+                            System.out.println("Nombre: " + estudiante.getNombre() + " (" + estudiante.getEdad() + ") - Nota media: " + estudiante.getMedia() + " - Matriculado: " + estudiante.getMatriculado() + "\n");
+                        }
+                    }
+                    break;
             }
 
-        } while (opcion > 2);
+        } while (opcion != 6);
 
     }
         public static class Menu {
