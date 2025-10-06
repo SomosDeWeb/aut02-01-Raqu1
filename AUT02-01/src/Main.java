@@ -5,7 +5,7 @@ public class Main {
     static void main(String[] args) {
         int opcion, edad;
         String nombre;
-        double notaMedia, mediaTotal;
+        double notaMedia, mediaTotal, suma;
         boolean matriculado, encontrado;
 
         ArrayList<Estudiante> listadoEstudiantes = new ArrayList<>();
@@ -68,6 +68,17 @@ public class Main {
                             encontrado = true;
                         }
 
+                    }
+
+                case 4:
+                    suma = 0;
+                    if (listadoEstudiantes.isEmpty()){
+                        System.out.println("No hay alumnos registrados.");
+                        } else {
+                            for (Estudiante estudiante : listadoEstudiantes)
+                                suma += estudiante.getMedia();
+                            mediaTotal = suma / listadoEstudiantes.size();
+                        System.out.println("La media total de los alumnos registrados es de: " + mediaTotal + "\n");
                     }
 
             }
