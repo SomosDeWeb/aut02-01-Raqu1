@@ -49,4 +49,9 @@ public class Estudiante {
     public boolean getMatriculado() {
         return this.matriculado;
     }
+
+    public String listarDatos() {
+        String datos = "Nombre: " + this.getNombre() + " (" + this.getEdad() + ") - Nota media: " + this.getMedia() + " - Matriculado: " + this.getMatriculado() + "\n";
+        return datos;
+    }
 }

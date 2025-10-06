@@ -6,7 +6,7 @@ public class Main {
         int opcion, edad;
         String nombre;
         double notaMedia, mediaTotal;
-        boolean matriculado;
+        boolean matriculado, encontrado;
 
         ArrayList<Estudiante> listadoEstudiantes = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -52,10 +52,24 @@ public class Main {
                         System.out.println("·> No hay alumnos registrados.");
                     else {
                         for (Estudiante estudiante : listadoEstudiantes) {
-                            System.out.println("Nombre: " + estudiante.getNombre() + " (" + estudiante.getEdad() + ") - Nota media: " + estudiante.getMedia() + " - Matriculado: " + estudiante.getMatriculado() + "\n");
+                            System.out.println(estudiante.listarDatos());
                         }
                     }
                     break;
+
+                case 3:
+                    encontrado = false;
+                    System.out.println("Introduce el nombre del estudiante a buscar: ");
+                    nombre = sc.nextLine();
+                    for (Estudiante listadoEstudiante : listadoEstudiantes) {
+                        if (listadoEstudiante.getNombre().equals(nombre)) {
+                            System.out.println("\nEstudiante encontrado.");
+                            System.out.println(listadoEstudiante.listarDatos());
+                            encontrado = true;
+                        }
+
+                    }
+
             }
 
         } while (opcion != 6);
