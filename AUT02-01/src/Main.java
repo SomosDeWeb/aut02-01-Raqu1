@@ -3,10 +3,11 @@ import java.util.Scanner;
 
 public class Main {
     static void main(String[] args) {
-        int opcion, edad;
+        int opcion, edad, pos, i;
         String nombre;
-        double notaMedia, mediaTotal, suma;
+        double notaMedia, mediaTotal, suma, mejorNota;
         boolean matriculado, encontrado;
+
 
         ArrayList<Estudiante> listadoEstudiantes = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
@@ -67,7 +68,6 @@ public class Main {
                             System.out.println(listadoEstudiante.listarDatos());
                             encontrado = true;
                         }
-
                     }
 
                 case 4:
@@ -79,6 +79,24 @@ public class Main {
                                 suma += estudiante.getMedia();
                             mediaTotal = suma / listadoEstudiantes.size();
                         System.out.println("La media total de los alumnos registrados es de: " + mediaTotal + "\n");
+                    }
+
+                case 5:
+                    mejorNota = Double.MAX_VALUE;
+                    pos = 0;
+                    i = 0;
+                    if(listadoEstudiantes.isEmpty())
+                        System.out.println("No hay alumnos registrados.");
+                    else {
+                        for (Estudiante estudiante : listadoEstudiantes) {
+                            if (estudiante.getMedia() > mejorNota) {
+                                notaMedia = estudiante.getMedia();
+                                pos = i;
+                            }
+                            i++;
+                        }
+                        System.out.println("El alumno con mejor nota es: ");
+                        System.out.println(listadoEstudiantes.get(pos).listarDatos());
                     }
 
             }
