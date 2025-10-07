@@ -14,10 +14,7 @@ public class Main {
 
         do {
             Menu.visualizarMenu();
-
-            System.out.println("Seleccione una opción: ");
-            opcion = sc.nextInt();
-            sc.nextLine();
+            opcion = Validaciones.ComprobarOpcion();
 
             switch (opcion) {
                 case 1:
@@ -42,9 +39,9 @@ public class Main {
                     matriculado = sc.nextBoolean();
                     sc.nextLine();
 
-                    Estudiante alumno = new Estudiante(nombre,edad,notaMedia,matriculado);
+                    Estudiante alumno = new Estudiante(nombre, edad, notaMedia, matriculado);
                     listadoEstudiantes.add(alumno);
-                    System.out.println("Estudinate añadido correctamente.");
+                    System.out.println("\nEstudinate añadido correctamente.\n");
                     break;
 
                 case 2:
@@ -62,35 +59,43 @@ public class Main {
                     encontrado = false;
                     System.out.println("Introduce el nombre del estudiante a buscar: ");
                     nombre = sc.nextLine();
-                    for (Estudiante listadoEstudiante : listadoEstudiantes) {
-                        if (listadoEstudiante.getNombre().equals(nombre)) {
-                            System.out.println("\nEstudiante encontrado.");
-                            System.out.println(listadoEstudiante.listarDatos());
-                            encontrado = true;
+                    if (listadoEstudiantes.isEmpty())
+                        System.out.println("No hay alumnos registrados.");
+                    else {
+                        for (Estudiante listadoEstudiante : listadoEstudiantes) {
+                            if (listadoEstudiante.getNombre().equals(nombre)) {
+                                System.out.println("\nEstudiante encontrado.");
+                                System.out.println(listadoEstudiante.listarDatos());
+                                encontrado = true;
+                            }
                         }
+                        if (!encontrado)
+                            System.out.println("·>Alumno no encontrado.");
                     }
+                    break;
 
                 case 4:
                     suma = 0;
-                    if (listadoEstudiantes.isEmpty()){
+                    if (listadoEstudiantes.isEmpty()) {
                         System.out.println("No hay alumnos registrados.");
-                        } else {
-                            for (Estudiante estudiante : listadoEstudiantes)
-                                suma += estudiante.getMedia();
-                            mediaTotal = suma / listadoEstudiantes.size();
+                    } else {
+                        for (Estudiante estudiante : listadoEstudiantes)
+                            suma += estudiante.getMedia();
+                        mediaTotal = suma / listadoEstudiantes.size();
                         System.out.println("La media total de los alumnos registrados es de: " + mediaTotal + "\n");
                     }
+                    break;
 
                 case 5:
                     mejorNota = Double.MAX_VALUE;
                     pos = 0;
                     i = 0;
-                    if(listadoEstudiantes.isEmpty())
+                    if (listadoEstudiantes.isEmpty())
                         System.out.println("No hay alumnos registrados.");
                     else {
                         for (Estudiante estudiante : listadoEstudiantes) {
                             if (estudiante.getMedia() > mejorNota) {
-                                notaMedia = estudiante.getMedia();
+                                mejorNota = estudiante.getMedia();
                                 pos = i;
                             }
                             i++;
@@ -98,15 +103,19 @@ public class Main {
                         System.out.println("El alumno con mejor nota es: ");
                         System.out.println(listadoEstudiantes.get(pos).listarDatos());
                     }
+                    break;
 
+                case 6:
+                    System.out.println("El programa se está cerrado...");
+                    break;
             }
-
         } while (opcion != 6);
 
     }
-        public static class Menu {
-            public static void visualizarMenu() {
-                System.out.println("""
+
+    public static class Menu {
+        public static void visualizarMenu() {
+            System.out.println("""
                     === Gestor de Estudiantes ===
                     1. Añadir estudiante
                     2. Listar estudiantes
@@ -115,9 +124,26 @@ public class Main {
                     5. Mostrar mejor estudiante
                     6. Salir
                     """);
-
-
-            }
         }
-
     }
+    public static class Validaciones {
+        public static int ComprobarOpcion() {
+            Scanner sc = new Scanner(System.in);
+            boolean valido = false;
+            int opcion;
+
+            do {
+                System.out.println("Seleccione una opcion: ");
+                opcion = sc.nextInt();
+                sc.nextLine();
+
+                if (opcion >= 1 && opcion <= 6)
+                    valido = true;
+                else System.out.println("Solo se admiten opciones del 1 al 6. Intentelo de nuevo.\n");
+
+            } while (!valido);
+
+            return opcion;
+        }
+    }
+}
